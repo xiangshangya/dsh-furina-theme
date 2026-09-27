@@ -27,9 +27,10 @@ description: Install, configure, verify, or remove the 芙宁娜 (Furina) theme 
 
 ## 安装步骤
 
-1. **取得源码**（任选其一）
-   - `git clone https://github.com/xiangshangya/dsh-furina-theme.git`
-   - 直连 GitHub 受限时，用镜像前缀，例如 `https://gh-proxy.com/https://github.com/xiangshangya/dsh-furina-theme/archive/refs/heads/main.zip`（下载 zip 后解压）
+1. **取得源码**（任选其一；国内直连 raw/仓库常被重置，优先试镜像）
+   - 直连：`git clone https://github.com/xiangshangya/dsh-furina-theme.git`
+   - 镜像（推荐）：下载 `https://gh-proxy.com/https://github.com/xiangshangya/dsh-furina-theme/archive/refs/heads/main.zip` 后解压
+   - 本文件本身的镜像地址：`https://gh-proxy.com/https://raw.githubusercontent.com/xiangshangya/dsh-furina-theme/main/SKILL.md`
 2. **（可跳过）重建构建产物**：仓库已包含 `lib/client.js`
    ```bash
    cd dsh-furina-theme

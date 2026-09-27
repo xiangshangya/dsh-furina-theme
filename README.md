@@ -12,7 +12,7 @@
 
 > 请按 https://github.com/xiangshangya/dsh-furina-theme 的 SKILL.md，为我当前的 DeepSeek Harness 安装并配置「芙宁娜主题」：
 >
-> 1. 能访问 GitHub 就直接读取该仓库的 `SKILL.md`；直连受限时用镜像前缀 `https://gh-proxy.com/` + 原始地址读取 raw 文件或下载 zip；
+> 1. 先读取安装说明：直连用 `https://raw.githubusercontent.com/xiangshangya/dsh-furina-theme/main/SKILL.md`；如果超时或被重置，改用镜像 `https://gh-proxy.com/https://raw.githubusercontent.com/xiangshangya/dsh-furina-theme/main/SKILL.md`（源码整包同理：`https://gh-proxy.com/https://github.com/xiangshangya/dsh-furina-theme/archive/refs/heads/main.zip`）；
 > 2. 严格按 SKILL.md 的「安装步骤」执行：把主题作为本地包放进 `$DSH_HOME/profiles/web/node_modules/`，并在 `cordis.patch.yml` 追加那段 insert（若已存在同名列就跳过安装）；
 > 3. 完成后告诉我需要重启 DSH，并在重启后按 SKILL.md 的「验证」清单确认主题真的生效（不要只看文件是否就位）；
 > 4. 任何异常按「排查 / 关闭 / 回滚」小节处理；不要改动我的其他插件、模型配置与会话数据。
