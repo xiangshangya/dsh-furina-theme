@@ -1,12 +1,23 @@
-# dsh-theme-misty-morning
+# dsh-芙宁娜主题 · DeepSeek Harness 主题插件
 
-> 仓库：**dsh-芙宁娜主题** / `dsh-furina-theme`（GitHub 仓库名不支持中文，故用英文名）。当前收录的主题是下面的 **Misty Morning**（codexthemes.ai 的 Codex 主题适配版）。
+> GitHub 仓库：**dsh-furina-theme**（仓库名不支持中文，故用英文）｜插件包名：`dsh-theme-misty-morning`（沿用最初的适配来源标识，功能与安装方式不受影响）
 
-把 codexthemes.ai 上的 Codex 主题 **Misty Morning**（v0.4.7，浅色 / native-immersive / 背景范围 workspace）适配到 **DeepSeek Harness（DSH）** 的主题插件。
+一套**芙宁娜主题**（浅色蓝雾、全窗插画、半透明侧边栏）的 DSH 客户端主题插件：宿主半 + 浏览器半，向页面注入 115 个 `--dsw-*` 令牌覆盖（浅色 + 深色伴随方案）与一份插件自有的全局样式表。
 
-- 源主题：<https://codexthemes.ai/themes/misty-morning>
-- 源包：`https://codexthemes.ai/api/themes/misty-morning/download`（`.codex-theme`，内含 `theme.css`、`assets/artwork.jpg`、manifest 调色板）
-- 本插件：`dsh-theme-misty-morning`，一个 DSH「宿主半 + 浏览器半」双面客户端插件
+- 适配来源：codexthemes.ai 的 Codex 主题包 `misty-morning`（<https://codexthemes.ai/themes/misty-morning>）—— 令牌契约与插画素材取自该包（`theme.css`、`assets/artwork.jpg`）
+- 本插件：**不修改 DSH 本体、不写用户偏好、不碰其他插件**，禁用或卸载即完全回滚
+- 给 agent 的完整安装/验证说明：[`SKILL.md`](./SKILL.md)
+
+## 想用这个主题？把下面这段发给你自己的 DeepSeek Harness
+
+> 请按 https://github.com/xiangshangya/dsh-furina-theme 的 SKILL.md，为我当前的 DeepSeek Harness 安装并配置「芙宁娜主题」：
+>
+> 1. 能访问 GitHub 就直接读取该仓库的 `SKILL.md`；直连受限时用镜像前缀 `https://gh-proxy.com/` + 原始地址读取 raw 文件或下载 zip；
+> 2. 严格按 SKILL.md 的「安装步骤」执行：把主题作为本地包放进 `$DSH_HOME/profiles/web/node_modules/`，并在 `cordis.patch.yml` 追加那段 insert（若已存在同名列就跳过安装）；
+> 3. 完成后告诉我需要重启 DSH，并在重启后按 SKILL.md 的「验证」清单确认主题真的生效（不要只看文件是否就位）；
+> 4. 任何异常按「排查 / 关闭 / 回滚」小节处理；不要改动我的其他插件、模型配置与会话数据。
+
+把上面这段整段复制发给你的 DSH 即可。想只让首页有插画、或想去掉首页小光点，在提示词后追加一句就行（对应 `--background-scope home` / `--no-motes`）。
 
 ## 变更
 
@@ -87,6 +98,7 @@ node scripts/build.mjs --background-scope home          # 只在首页出现插�
 ```
 package.json          dsh.client 声明（platform: web）与 bundle 补丁入口
 cordis.patch.yml      dsh.bundle.patch：一行 insert，供 dsh plugin add 自动挂载
+SKILL.md              给 agent 的安装/配置/验证/回滚说明（复制提示词走的就是它）
 lib/index.js          宿主半（空实现，只为让 Loader 行与 ./client 解析成立）
 lib/client.js         浏览器半（构建产物：令牌表 + 样式表 + apply/inject）
 src/palette.mjs       浅色 / 深色调色板与 --dsw-* 令牌表
