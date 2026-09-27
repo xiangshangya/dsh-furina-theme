@@ -1,0 +1,41 @@
+{
+  "name": "dsh-theme-misty-morning",
+  "version": "0.1.6",
+  "private": true,
+  "description": "Misty Morning — a calm blue-toned DeepSeek Harness theme (artwork canvas, coordinated blue-grey materials, and a full --dsw-* token layer) adapted from the codexthemes.ai Codex theme of the same name.",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": {
+      "default": "./lib/index.js"
+    },
+    "./client": {
+      "default": "./lib/client.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-theme"
+      ]
+    }
+  },
+  "files": [
+    "lib/index.js",
+    "lib/client.js",
+    "cordis.patch.yml",
+    "src",
+    "scripts",
+    "assets",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs"
+  },
+  "license": "MIT"
+}

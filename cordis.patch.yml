@@ -1,0 +1,16 @@
+# dsh-theme-misty-morning bundle patch
+#
+# This is the package's `dsh.bundle.patch` layer. Installing the plugin through
+# the profile (`dsh --profile <name> plugin add <path-or-name>`) reconciles
+# `dsh.profile.bundles` against installed packages and, seeing this
+# declaration, appends `dsh-theme-misty-morning` to the bundle stack; the
+# profile boot then merges this patch — one `insert` of the plugin row.
+#
+# The theme needs no config. The illustration scope (home page only, or home
+# and conversations) is baked into the stylesheet at build time:
+#
+#   npm run build -- --background-scope home
+#
+- insert:
+    - id: theme-misty-morning
+      name: 'dsh-theme-misty-morning'

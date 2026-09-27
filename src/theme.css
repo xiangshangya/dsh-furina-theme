@@ -1,0 +1,119 @@
+/* misty-morning for DeepSeek Harness — materials, artwork, and decoration.
+ *
+ * Layout mode: native-immersive. DSH geometry, controls, hit targets,
+ * keyboard focus, and hover-only affordances are untouched; this sheet owns
+ * only artwork, veils, surface materials, and non-interactive decoration.
+ * Every colour comes from a --dmm-* variable declared by the palette block
+ * above it, and every DSH surface that paints itself from a --dsw-* alias is
+ * driven by the token layer in the plugin body.
+ *
+ * Decoration slots (mirroring the source theme's decoration menu):
+ *   [1] artwork canvas        [5] header wash
+ *   [2] home stage veil       [6] terminal host
+ *   [3] reading veil          [7] caret / selection / focus
+ *   [4] sidebar material      [8] drift, narrow widths, reduced motion
+ */
+
+/* [1] Artwork canvas -------------------------------------------------------
+   The illustration paints once on <body>, fixed, so every translucent
+   surface above it shares the same image and focal point (68% 18%). */
+__ART_SCOPE__ {
+  background-color: var(--dmm-canvas);
+  background-image: var(--dmm-art-gradient), var(--dmm-art);
+  background-position: 0 0, 68% 18%;
+  background-size: auto, cover;
+  background-repeat: no-repeat, no-repeat;
+  background-attachment: fixed, fixed;
+}
+
+/* [2] Home stage: the illustration stays dominant behind the hero ---------- */
+[data-dsh-center-col] [data-phase="hero"] {
+  background-color: var(--dmm-veil-hero) !important;
+  background-image: var(--dmm-motes) !important;
+  background-size: 89px 89px, 67px 67px, 123px 123px !important;
+  background-repeat: repeat !important;
+  animation: dmm-drift 16s ease-in-out infinite alternate;
+}
+
+/* [3] Reading veil: long-form prose, diffs, and code get a stronger layer -- */
+[data-dsh-center-col] [data-phase="active"],
+[data-dsh-center-col] [data-phase="settling"] {
+  background-color: var(--dmm-veil-read) !important;
+}
+
+/* [4] Sidebar material: the column paints the *same* illustration as the
+   window (identical focal point and `fixed` attachment, so it lines up
+   pixel-for-pixel) and veils it itself. DSH stacks a window-wide 70% veil plus
+   the column fill above the body artwork, which leaves the illustration
+   invisible behind the sidebar; re-painting it inside the column is what makes
+   the sidebar read like the Codex theme, where the same image shows through at
+   a lighter veil than the content area. */
+:has(> [data-slot="sidebar"]) {
+  background-image:
+    linear-gradient(var(--dmm-sidebar-veil), var(--dmm-sidebar-veil)),
+    var(--dmm-art-gradient),
+    var(--dmm-art) !important;
+  background-position: 0 0, 0 0, 68% 18%;
+  background-size: auto, auto, cover;
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-attachment: fixed, fixed, fixed;
+}
+
+[data-slot="sidebar"] > div {
+  background-image: linear-gradient(180deg, var(--dmm-sidebar-wash) 0%, rgba(255, 255, 255, 0) 46%) !important;
+  /* Light frost keeps nav text readable over whatever the illustration does,
+     the same technique DSH's own menus use. */
+  backdrop-filter: var(--dmm-sidebar-frost);
+  -webkit-backdrop-filter: var(--dmm-sidebar-frost);
+}
+
+/* [5] Window-drag strips (conversation header and sidebar lockup) ---------- */
+[data-window-drag="true"] {
+  background-color: var(--dmm-header-wash) !important;
+}
+
+/* [6] Terminal host: the DSH terminal reads its xterm palette from the
+   computed background/foreground of this host, so the token layer already
+   carries the colours; the xterm viewport sits above them. */
+.xterm .xterm-viewport,
+.xterm .xterm-screen {
+  background-color: var(--dmm-term-bg);
+}
+
+/* [7] Caret, selection, focus --------------------------------------------- */
+::selection {
+  background-color: var(--dmm-accent-soft);
+  color: var(--dmm-text);
+}
+
+input,
+textarea,
+[contenteditable="true"] {
+  caret-color: var(--dmm-accent);
+}
+
+:focus-visible {
+  outline-color: var(--dmm-focus);
+}
+
+/* [8] Drift, narrow widths, reduced motion --------------------------------- */
+@keyframes dmm-drift {
+  from { background-position: 0 0, 0 0, 0 0; }
+  to { background-position: 14px -10px, -12px 8px, 9px 12px; }
+}
+
+@media (max-width: 1000px) {
+  __ART_SCOPE__ {
+    background-position: 0 0, 66% 26%;
+  }
+  [data-dsh-center-col] [data-phase="hero"] {
+    background-image: none !important;
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-dsh-center-col] [data-phase="hero"] {
+    animation: none;
+  }
+}
